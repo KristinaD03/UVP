@@ -1,0 +1,3 @@
+#str(n) pretvori vrednosti v niz (string), števke
+#int(s) pretvori vrednosti v celo število
+#[::-1] obrne vrstni red znakov v nizu
