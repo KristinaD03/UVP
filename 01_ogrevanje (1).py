@@ -1,68 +1,73 @@
 # =============================================================================
-# Vgrajene metode
-# =====================================================================@027491=
+# Ogrevanje
+# =====================================================================@020188=
 # 1. podnaloga
-# Sestavite funkcijo `prezrcali`, ki vrne prezrcaljen niz.
+# Nagajivi škrat je pokvaril zamike v funkciji `vsebuje_vprasaj` in premešal
+# vrstice v funkciji `odstrani_presledke`. Popravite obe funkciji tako, da
+# uspešno opravita vse teste.
 # 
-#     >>> prezrcali('abeceda')
-#     'adeceba'
+# *Funkciji sta že definirani v datoteki.*
 # =============================================================================
-def prezrcali(n):
-    return n[::-1]
-    
-# =====================================================================@027492=
-# 2. podnaloga
-# Sestavite funkcijo `je_palindrom`, ki preveri, če je niz palindrom.
-# 
-#     >>> je_palindrom('kajak')
-#     True
-# =============================================================================
-def je_palindrom(n):
-    if n == n[::-1]:
-        return True
+def vsebuje_vprasaj(niz):
+    znak = "?"
+    for znak in niz:
+     if znak == "?":
+      return True
     else:
-        return False
-# =====================================================================@027483=
-# 3. podnaloga
-# Napiši funkcijo `odstrani_samoglasnike`, ki sprejme niz in vrne nov niz brez
-# začetnih samoglasnikov.
-# 
-#     >>> odstrani_samoglasnike("aeoIcesta")
-#     "cesta"
-# =============================================================================
-def odstrani_samoglasnike(n):
-   if n[0] in 'aeiouAEIOU':
-       return odstrani_samoglasnike(n[1:])
-   else:
-       return n
-   
+     return False
 
-# =====================================================================@027484=
-# 4. podnaloga
-# Sestavite funkcijo `obrni_oklepaje`, ki sprejme niz, ki vsebuje zgolj cela
-# števila, operatorje in oklepaje "(" in ")" ter vrne niz, kjer so vsi oklepaji
-# obrnjeni (znak ")" se pretvori v "(" in obratno).
-# 
-#     >>> obrni_oklepaje("((()(3+4)))")
-#     ")))()3+4((("
-# =============================================================================
-def obrni_oklepaje(n):
-    return n.replace("(", "x").replace(")", "(").replace("x", ")")
-# =====================================================================@027485=
-# 5. podnaloga
-# Sestavite funkcijo `prestej_posebno`, ki sprejme niz, znak `c` in število `k`
-# ter prešteje število presledkov za `k`-to pojavitvijo znaka `c`.
-# 
-#     >>> prestej_posebno("aa  a ", "a", 2)
-#     3
-#     >>> prestej_posebno("aa  a ", "a", 3)
-#     1
-# =============================================================================
-
+def odstrani_presledke(niz):
+    nov_niz = ""
+    for znak in niz:
+      if znak != " ":
+         nov_niz += znak
+    return nov_niz
     
 
+            
+        
+# =====================================================================@020189=
+# 2. podnaloga
+# Napišite funkcijo `odstrani_veckratne_vprasaje`, ki sprejme niz ter mu
+# odstrani večkratne zaporedne vprašaje. Funkcija naj vrne nov popravljen niz.
+# 
+#     >>> odstrani_veckratne_vprasaje('?????')
+#     '?'
+#     >>> odstrani_veckratne_vprasaje('Kdo?? Si?? Ti???')
+#     'Kdo? Si? Ti?'
+#     >>> odstrani_veckratne_vprasaje('Kdo?? Si? Ti?')
+#     'Kdo? Si? Ti?'
+#     >>> odstrani_veckratne_vprasaje('Ananas')
+#     'Ananas'
+# =============================================================================
 
-#n.count(c)
+
+
+       
+
+      
+
+        
+# =====================================================================@020191=
+# 3. podnaloga
+# Implementirajte [Evklidov algoritem](https://sl.wikipedia.org/wiki/Evklidov_algoritem)
+# s pomočjo zanke `while`.
+# 
+#     >>> evklidov_algoritem(144, 40)
+#     8
+#     >>> evklidov_algoritem(81, 36)
+#     9
+# =============================================================================
+def evklidov_algoritem(n, m):
+    ostanek = n % m
+    while ostanek > 0:
+        n = m
+        m = ostanek
+        ostanek = n % m
+    return m
+
+
+
 
 
 
@@ -677,12 +682,17 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNzQ5MSwidXNlciI6MTE0Mjh9:1vzxcS:l5MIYEECaDsfJzj4ZqPioEAT2sj_5xikYs7Kd_-z6EM"
+        ] = "eyJwYXJ0IjoyMDE4OCwidXNlciI6MTE0Mjh9:1w2UDw:yoOet71Rg6U64ZcsQFLaxRtstCFRAgm-6cc0SkGf38Q"
         try:
-            Check.equal('prezrcali("x")', 'x')
-            Check.equal('prezrcali("xy")', 'yx')
-            Check.equal('prezrcali("abeceda")', 'adeceba')
-            Check.equal('prezrcali("alisebomartanatramobesila")', 'alisebomartanatramobesila')
+            Check.equal('vsebuje_vprasaj("")', False)
+            Check.equal('vsebuje_vprasaj("?")', True)
+            Check.equal('vsebuje_vprasaj("Banana")', False) and \
+            Check.equal('vsebuje_vprasaj("Poma(???)ranča.")', True) and \
+            Check.equal('vsebuje_vprasaj("Kivi?")', True)
+            
+            Check.equal('odstrani_presledke("")', '')
+            Check.equal('odstrani_presledke("   ")', '')
+            Check.equal('odstrani_presledke("Kdor drugemu jamo koplje kruha strada.")', "Kdordrugemujamokopljekruhastrada.")
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:
@@ -694,12 +704,13 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNzQ5MiwidXNlciI6MTE0Mjh9:1vzxcS:1o0Ql0K6PscjTi9HdfXDonl6BOW-fePs3DaOWp99tag"
+        ] = "eyJwYXJ0IjoyMDE4OSwidXNlciI6MTE0Mjh9:1w2UDw:3kRCqqebpW6SGJDF3Nd_GzKftPaiiaI7_cJgEJ36Xd8"
         try:
-            Check.equal('je_palindrom("kajak")', True)
-            Check.equal('je_palindrom("abeceda")', False)
-            Check.equal('je_palindrom("oko")', True)
-            Check.equal('je_palindrom("neradodaren")', True)
+            Check.equal("odstrani_veckratne_vprasaje('?????')", '?')
+            Check.equal("odstrani_veckratne_vprasaje('Kdo?? Si?? Ti???')", 'Kdo? Si? Ti?')
+            Check.equal("odstrani_veckratne_vprasaje('Kdo?? Si? Ti?')", 'Kdo? Si? Ti?')
+            Check.equal("odstrani_veckratne_vprasaje('Ananas')", 'Ananas')
+            Check.equal("odstrani_veckratne_vprasaje('')", '')
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:
@@ -711,46 +722,19 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNzQ4MywidXNlciI6MTE0Mjh9:1vzxcS:oiS0rwlVVqkydQBIV_PAbIiZFQMKcwaoIJIJL4YZcB8"
+        ] = "eyJwYXJ0IjoyMDE5MSwidXNlciI6MTE0Mjh9:1w2UDw:65zAU11B0v9Y48RgKb-fN6sxju5pCJawW_bN56os8y0"
         try:
-            Check.equal('odstrani_samoglasnike("aeoIcesta")', "cesta")
-            Check.secret(odstrani_samoglasnike("laika"))
-            Check.secret(odstrani_samoglasnike("aeter"))
-        except TimeoutError:
-            Check.error("Dovoljen čas izvajanja presežen")
-        except Exception:
-            Check.error(
-                "Testi sprožijo izjemo\n  {0}",
-                "\n  ".join(traceback.format_exc().split("\n"))[:-2],
-            )
-
-    if Check.part():
-        Check.current_part[
-            "token"
-        ] = "eyJwYXJ0IjoyNzQ4NCwidXNlciI6MTE0Mjh9:1vzxcS:4cIUkFKNw2flXX9R9HQvDD-9J3bkudbm_5CIDlkvgqg"
-        try:
-            Check.equal('obrni_oklepaje("((()(3+4)))")', ")))()3+4(((")
-            Check.secret(obrni_oklepaje("1234()"))
-            Check.secret(obrni_oklepaje("1(2(3(4))))))))))"))
-        except TimeoutError:
-            Check.error("Dovoljen čas izvajanja presežen")
-        except Exception:
-            Check.error(
-                "Testi sprožijo izjemo\n  {0}",
-                "\n  ".join(traceback.format_exc().split("\n"))[:-2],
-            )
-
-    if Check.part():
-        Check.current_part[
-            "token"
-        ] = "eyJwYXJ0IjoyNzQ4NSwidXNlciI6MTE0Mjh9:1vzxcS:NBoZD9kgTBbCtZQL7_YXa14UaooXeEVF7ojRq-TGiPc"
-        try:
-            Check.equal('prestej_posebno("aa  a ", "a", 2)', 3)
-            Check.equal('prestej_posebno("aa  a ", "a", 3)', 1)
-            Check.secret(prestej_posebno("1234()", "3", 5))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 4))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 5))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 6))
+            Check.equal('evklidov_algoritem(144, 40)', 8)
+            Check.equal('evklidov_algoritem(81, 36)', 9)
+            Check.equal('evklidov_algoritem(10, 10)', 10)
+            Check.equal('evklidov_algoritem(17, 13)', 1)
+            
+            import random
+            random.seed(1)
+            for i in range(100):
+                x = random.randint(1, 10000)
+                offset = random.randint(1, 10000)
+                Check.secret(evklidov_algoritem(x + offset, x), (x + offset, x))
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:

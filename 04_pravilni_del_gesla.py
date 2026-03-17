@@ -1,68 +1,45 @@
 # =============================================================================
-# Vgrajene metode
-# =====================================================================@027491=
+# Pravilni del gesla
+#
+# Micka in Tonček se igrata vislice. Micka si je izmislila geslo, Tonček pa ga 
+# poskuša uganiti.
+# =====================================================================@024175=
 # 1. podnaloga
-# Sestavite funkcijo `prezrcali`, ki vrne prezrcaljen niz.
+# Definirajte funkcijo `pravilni_del_gesla`, ki sprejme geslo in do sedaj ugibane 
+# črke. Funkcija naj vrne geslo, v katerem so črke, ki jih Tonček še ni uganil, 
+# zamenjane z znakom '_'.
+# Na primer:
 # 
-#     >>> prezrcali('abeceda')
-#     'adeceba'
+#     >>> pravilni_del_gesla('sladoled', 'aeighls')
+#     'sla__le_'
+#     >>> pravilni_del_gesla('dialektičnomaterialističen', 'kajeto')
+#     '__a_ekt___o_ate__a___t__e_'
 # =============================================================================
-def prezrcali(n):
-    return n[::-1]
+
+  
+        
+
+           
     
-# =====================================================================@027492=
+    
+    
+# =====================================================================@024176=
 # 2. podnaloga
-# Sestavite funkcijo `je_palindrom`, ki preveri, če je niz palindrom.
+# Micko zanima, katere izmed ugibanih črk so bile napačne (da lahko Tončka obesi).
 # 
-#     >>> je_palindrom('kajak')
-#     True
-# =============================================================================
-def je_palindrom(n):
-    if n == n[::-1]:
-        return True
-    else:
-        return False
-# =====================================================================@027483=
-# 3. podnaloga
-# Napiši funkcijo `odstrani_samoglasnike`, ki sprejme niz in vrne nov niz brez
-# začetnih samoglasnikov.
+# Definirajte funkcijo `nepravilni_ugibi`, ki sprejme geslo in do sedaj ugibane 
+# črke. Funkcija naj vrne ugibane črke, ki se na pojavljajo v geslu.
+# Na primer:
 # 
-#     >>> odstrani_samoglasnike("aeoIcesta")
-#     "cesta"
-# =============================================================================
-def odstrani_samoglasnike(n):
-   if n[0] in 'aeiouAEIOU':
-       return odstrani_samoglasnike(n[1:])
-   else:
-       return n
-   
-
-# =====================================================================@027484=
-# 4. podnaloga
-# Sestavite funkcijo `obrni_oklepaje`, ki sprejme niz, ki vsebuje zgolj cela
-# števila, operatorje in oklepaje "(" in ")" ter vrne niz, kjer so vsi oklepaji
-# obrnjeni (znak ")" se pretvori v "(" in obratno).
-# 
-#     >>> obrni_oklepaje("((()(3+4)))")
-#     ")))()3+4((("
-# =============================================================================
-def obrni_oklepaje(n):
-    return n.replace("(", "x").replace(")", "(").replace("x", ")")
-# =====================================================================@027485=
-# 5. podnaloga
-# Sestavite funkcijo `prestej_posebno`, ki sprejme niz, znak `c` in število `k`
-# ter prešteje število presledkov za `k`-to pojavitvijo znaka `c`.
-# 
-#     >>> prestej_posebno("aa  a ", "a", 2)
-#     3
-#     >>> prestej_posebno("aa  a ", "a", 3)
-#     1
+#     >>> nepravilni_ugibi('sladoled', 'aeighls')
+#     'igh'
+#     >>> nepravilni_ugibi('dialektičnomaterialističen', 'kajeto?')
+#     'j?'
 # =============================================================================
 
-    
 
 
-#n.count(c)
+
 
 
 
@@ -677,12 +654,14 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNzQ5MSwidXNlciI6MTE0Mjh9:1vzxcS:l5MIYEECaDsfJzj4ZqPioEAT2sj_5xikYs7Kd_-z6EM"
+        ] = "eyJwYXJ0IjoyNDE3NSwidXNlciI6MTE0Mjh9:1w2WMz:PRn3ijp6SNRVtk6mjoSO1V2174D5T37HL4X5sttd_mQ"
         try:
-            Check.equal('prezrcali("x")', 'x')
-            Check.equal('prezrcali("xy")', 'yx')
-            Check.equal('prezrcali("abeceda")', 'adeceba')
-            Check.equal('prezrcali("alisebomartanatramobesila")', 'alisebomartanatramobesila')
+            Check.equal('pravilni_del_gesla("sladoled", "aeighls")', 'sla__le_')
+            Check.equal('pravilni_del_gesla("dialektičnomaterialističen", "kajeto")', '__a_ekt___o_ate__a___t__e_')
+            Check.equal('pravilni_del_gesla("abcdef", "")', '______')
+            Check.equal('pravilni_del_gesla("", "ax")', '')
+            Check.equal('pravilni_del_gesla("posebni-znaki", "zn-ak")', '_____n_-znak_')
+            Check.secret(pravilni_del_gesla('sdfghjkjbvhckansdlknsldnaslkdnlsqweumno', 'kajetocau'))
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:
@@ -694,63 +673,14 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNzQ5MiwidXNlciI6MTE0Mjh9:1vzxcS:1o0Ql0K6PscjTi9HdfXDonl6BOW-fePs3DaOWp99tag"
+        ] = "eyJwYXJ0IjoyNDE3NiwidXNlciI6MTE0Mjh9:1w2WMz:wS4Jh5eOOZNxVaQBIbnPTgNCGPyz7-E_aWicVjiZPA0"
         try:
-            Check.equal('je_palindrom("kajak")', True)
-            Check.equal('je_palindrom("abeceda")', False)
-            Check.equal('je_palindrom("oko")', True)
-            Check.equal('je_palindrom("neradodaren")', True)
-        except TimeoutError:
-            Check.error("Dovoljen čas izvajanja presežen")
-        except Exception:
-            Check.error(
-                "Testi sprožijo izjemo\n  {0}",
-                "\n  ".join(traceback.format_exc().split("\n"))[:-2],
-            )
-
-    if Check.part():
-        Check.current_part[
-            "token"
-        ] = "eyJwYXJ0IjoyNzQ4MywidXNlciI6MTE0Mjh9:1vzxcS:oiS0rwlVVqkydQBIV_PAbIiZFQMKcwaoIJIJL4YZcB8"
-        try:
-            Check.equal('odstrani_samoglasnike("aeoIcesta")', "cesta")
-            Check.secret(odstrani_samoglasnike("laika"))
-            Check.secret(odstrani_samoglasnike("aeter"))
-        except TimeoutError:
-            Check.error("Dovoljen čas izvajanja presežen")
-        except Exception:
-            Check.error(
-                "Testi sprožijo izjemo\n  {0}",
-                "\n  ".join(traceback.format_exc().split("\n"))[:-2],
-            )
-
-    if Check.part():
-        Check.current_part[
-            "token"
-        ] = "eyJwYXJ0IjoyNzQ4NCwidXNlciI6MTE0Mjh9:1vzxcS:4cIUkFKNw2flXX9R9HQvDD-9J3bkudbm_5CIDlkvgqg"
-        try:
-            Check.equal('obrni_oklepaje("((()(3+4)))")', ")))()3+4(((")
-            Check.secret(obrni_oklepaje("1234()"))
-            Check.secret(obrni_oklepaje("1(2(3(4))))))))))"))
-        except TimeoutError:
-            Check.error("Dovoljen čas izvajanja presežen")
-        except Exception:
-            Check.error(
-                "Testi sprožijo izjemo\n  {0}",
-                "\n  ".join(traceback.format_exc().split("\n"))[:-2],
-            )
-
-    if Check.part():
-        Check.current_part[
-            "token"
-        ] = "eyJwYXJ0IjoyNzQ4NSwidXNlciI6MTE0Mjh9:1vzxcS:NBoZD9kgTBbCtZQL7_YXa14UaooXeEVF7ojRq-TGiPc"
-        try:
-            Check.equal('prestej_posebno("aa  a ", "a", 2)', 3)
-            Check.equal('prestej_posebno("aa  a ", "a", 3)', 1)
-            Check.secret(prestej_posebno("1234()", "3", 5))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 4))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 5))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 6))
+            Check.equal('nepravilni_ugibi("sladoled", "aeighls")', 'igh')
+            Check.equal('nepravilni_ugibi("dialektičnomaterialističen", "kajeto")', 'j')
+            Check.equal('nepravilni_ugibi("abcdef", "")', '')
+            Check.equal('nepravilni_ugibi("", "ax")', 'ax')
+            Check.equal('nepravilni_ugibi("posebni-znaki", "zn-ak")', '')
+            Check.secret(nepravilni_ugibi('sdfghjkjbvhckansdlknsldnaslkdnlsqweumno', 'kajetocau'))
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:

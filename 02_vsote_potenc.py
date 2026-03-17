@@ -1,68 +1,41 @@
 # =============================================================================
-# Vgrajene metode
-# =====================================================================@027491=
+# Vsote potenc
+#
+# Naloge tokrat rešujte z zankami.
+# =====================================================================@000978=
 # 1. podnaloga
-# Sestavite funkcijo `prezrcali`, ki vrne prezrcaljen niz.
-# 
-#     >>> prezrcali('abeceda')
-#     'adeceba'
+# Sestavite funkcijo `vsota_prvih(n)`, ki vrne vsoto prvih `n` naravnih števil.
 # =============================================================================
-def prezrcali(n):
-    return n[::-1]
-    
-# =====================================================================@027492=
+def vsota_prvih(n):
+    vsota = 0
+    for i in range (1, n+1):
+        vsota += i
+    return vsota
+# =====================================================================@000979=
 # 2. podnaloga
-# Sestavite funkcijo `je_palindrom`, ki preveri, če je niz palindrom.
-# 
-#     >>> je_palindrom('kajak')
-#     True
+# Sestavite funkcijo `vsota_prvih_kvadratov(n)`, ki vrne vsoto kvadratov
+# prvih `n` naravnih števil.
 # =============================================================================
-def je_palindrom(n):
-    if n == n[::-1]:
-        return True
-    else:
-        return False
-# =====================================================================@027483=
+def vsota_prvih_kvadratov(n):
+    vsota = 0
+    for i in range (1, n + 1):
+        vsota += i ** 2
+    return vsota
+
+# =====================================================================@000980=
 # 3. podnaloga
-# Napiši funkcijo `odstrani_samoglasnike`, ki sprejme niz in vrne nov niz brez
-# začetnih samoglasnikov.
-# 
-#     >>> odstrani_samoglasnike("aeoIcesta")
-#     "cesta"
+# Sestavite funkcijo `vsota_prvih_potenc(n, k)`, ki vrne vsoto `k`-tih potenc
+# prvih `n` naravnih števil. Argument `k` naj bo neobvezen in naj ima privzeto
+# vrednost `1`.
 # =============================================================================
-def odstrani_samoglasnike(n):
-   if n[0] in 'aeiouAEIOU':
-       return odstrani_samoglasnike(n[1:])
-   else:
-       return n
-   
-
-# =====================================================================@027484=
-# 4. podnaloga
-# Sestavite funkcijo `obrni_oklepaje`, ki sprejme niz, ki vsebuje zgolj cela
-# števila, operatorje in oklepaje "(" in ")" ter vrne niz, kjer so vsi oklepaji
-# obrnjeni (znak ")" se pretvori v "(" in obratno).
-# 
-#     >>> obrni_oklepaje("((()(3+4)))")
-#     ")))()3+4((("
-# =============================================================================
-def obrni_oklepaje(n):
-    return n.replace("(", "x").replace(")", "(").replace("x", ")")
-# =====================================================================@027485=
-# 5. podnaloga
-# Sestavite funkcijo `prestej_posebno`, ki sprejme niz, znak `c` in število `k`
-# ter prešteje število presledkov za `k`-to pojavitvijo znaka `c`.
-# 
-#     >>> prestej_posebno("aa  a ", "a", 2)
-#     3
-#     >>> prestej_posebno("aa  a ", "a", 3)
-#     1
-# =============================================================================
-
-    
+def vsota_prvih_potenc(n, k = 1 ):
+    vsota = 0
+    for i in range(1, n + 1):
+        vsota += i ** k
+    return vsota
+      
 
 
-#n.count(c)
 
 
 
@@ -677,12 +650,14 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNzQ5MSwidXNlciI6MTE0Mjh9:1vzxcS:l5MIYEECaDsfJzj4ZqPioEAT2sj_5xikYs7Kd_-z6EM"
+        ] = "eyJwYXJ0Ijo5NzgsInVzZXIiOjExNDI4fQ:1w2VTI:i7YZxW_ZOfLB8QRPOqhNb77iAXmcrKz5WuqsCUj4q0c"
         try:
-            Check.equal('prezrcali("x")', 'x')
-            Check.equal('prezrcali("xy")', 'yx')
-            Check.equal('prezrcali("abeceda")', 'adeceba')
-            Check.equal('prezrcali("alisebomartanatramobesila")', 'alisebomartanatramobesila')
+            Check.equal('vsota_prvih(0)', 0)
+            Check.equal('vsota_prvih(3)', 6)
+            Check.equal('vsota_prvih(5)', 15)
+            Check.equal('vsota_prvih(36)', 666)
+            if type(vsota_prvih(5)) != int:
+                Check.error('Funkcija vsota_prvih ne vrne celega števila.')
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:
@@ -694,12 +669,13 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNzQ5MiwidXNlciI6MTE0Mjh9:1vzxcS:1o0Ql0K6PscjTi9HdfXDonl6BOW-fePs3DaOWp99tag"
+        ] = "eyJwYXJ0Ijo5NzksInVzZXIiOjExNDI4fQ:1w2VTI:sl22KBUx7ZiYqAs0Gs2d7tOsKl96fpiqtfS8FA6Pk7U"
         try:
-            Check.equal('je_palindrom("kajak")', True)
-            Check.equal('je_palindrom("abeceda")', False)
-            Check.equal('je_palindrom("oko")', True)
-            Check.equal('je_palindrom("neradodaren")', True)
+            Check.equal('vsota_prvih_kvadratov(3)', 14)
+            Check.equal('vsota_prvih_kvadratov(5)', 55)
+            Check.equal('vsota_prvih_kvadratov(36)', 16206)
+            if type(vsota_prvih_kvadratov(5)) != int:
+                Check.error('Funkcija vsota_prvih ne vrne celega števila.')
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:
@@ -711,46 +687,16 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNzQ4MywidXNlciI6MTE0Mjh9:1vzxcS:oiS0rwlVVqkydQBIV_PAbIiZFQMKcwaoIJIJL4YZcB8"
+        ] = "eyJwYXJ0Ijo5ODAsInVzZXIiOjExNDI4fQ:1w2VTI:LS2ehjDOdyG5wvsnlTIoNsQOn_yZyoVvW4dM3cpFQqw"
         try:
-            Check.equal('odstrani_samoglasnike("aeoIcesta")', "cesta")
-            Check.secret(odstrani_samoglasnike("laika"))
-            Check.secret(odstrani_samoglasnike("aeter"))
-        except TimeoutError:
-            Check.error("Dovoljen čas izvajanja presežen")
-        except Exception:
-            Check.error(
-                "Testi sprožijo izjemo\n  {0}",
-                "\n  ".join(traceback.format_exc().split("\n"))[:-2],
-            )
-
-    if Check.part():
-        Check.current_part[
-            "token"
-        ] = "eyJwYXJ0IjoyNzQ4NCwidXNlciI6MTE0Mjh9:1vzxcS:4cIUkFKNw2flXX9R9HQvDD-9J3bkudbm_5CIDlkvgqg"
-        try:
-            Check.equal('obrni_oklepaje("((()(3+4)))")', ")))()3+4(((")
-            Check.secret(obrni_oklepaje("1234()"))
-            Check.secret(obrni_oklepaje("1(2(3(4))))))))))"))
-        except TimeoutError:
-            Check.error("Dovoljen čas izvajanja presežen")
-        except Exception:
-            Check.error(
-                "Testi sprožijo izjemo\n  {0}",
-                "\n  ".join(traceback.format_exc().split("\n"))[:-2],
-            )
-
-    if Check.part():
-        Check.current_part[
-            "token"
-        ] = "eyJwYXJ0IjoyNzQ4NSwidXNlciI6MTE0Mjh9:1vzxcS:NBoZD9kgTBbCtZQL7_YXa14UaooXeEVF7ojRq-TGiPc"
-        try:
-            Check.equal('prestej_posebno("aa  a ", "a", 2)', 3)
-            Check.equal('prestej_posebno("aa  a ", "a", 3)', 1)
-            Check.secret(prestej_posebno("1234()", "3", 5))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 4))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 5))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 6))
+            try:
+                Check.equal('vsota_prvih_potenc(3)', 6)
+                Check.equal('vsota_prvih_potenc(5, k=2)', 55)
+                Check.equal('vsota_prvih_potenc(36, k=3)', 443556)
+                if type(vsota_prvih_potenc(5)) != int:
+                    Check.error('Funkcija vsota_prvih ne vrne celega števila.')
+            except:
+                Check.error('Funkcija vsota_prvih_potenc ne deluje pravilno.\nAli je k nastavljen kot neobvezen argument?')
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:

@@ -1,68 +1,52 @@
 # =============================================================================
-# Vgrajene metode
-# =====================================================================@027491=
+# Vsote števk
+#
+# Naloge tokrat rešujte z zankami.
+# =====================================================================@000981=
 # 1. podnaloga
-# Sestavite funkcijo `prezrcali`, ki vrne prezrcaljen niz.
-# 
-#     >>> prezrcali('abeceda')
-#     'adeceba'
+# Sestavite funkcijo `vsota_stevk`, ki vrne vsoto števk podanega števila.
 # =============================================================================
-def prezrcali(n):
-    return n[::-1]
-    
-# =====================================================================@027492=
+#def vsota_stevk(n):
+ #   n = str(n)
+ #   vsota = 0
+ #   for i in n:
+ #       vsota += int(i)
+ #   return vsota
+def vsota_stevk(n):
+    vsota = 0
+    while n > 0:
+        vsota += n % 10
+        n = n // 10
+    return vsota
+# =====================================================================@000982=
 # 2. podnaloga
-# Sestavite funkcijo `je_palindrom`, ki preveri, če je niz palindrom.
-# 
-#     >>> je_palindrom('kajak')
-#     True
+# Sestavite funkcijo `vsota_vecjih_stevk(n, k)`, ki vrne vsoto tistih števk
+# števila `n`, ki so večje ali enake `k`. Če parametra `k` ne podamo, naj
+# funkcija vrne vsoto vseh števk števila `n`.
 # =============================================================================
-def je_palindrom(n):
-    if n == n[::-1]:
-        return True
-    else:
-        return False
-# =====================================================================@027483=
-# 3. podnaloga
-# Napiši funkcijo `odstrani_samoglasnike`, ki sprejme niz in vrne nov niz brez
-# začetnih samoglasnikov.
-# 
-#     >>> odstrani_samoglasnike("aeoIcesta")
-#     "cesta"
-# =============================================================================
-def odstrani_samoglasnike(n):
-   if n[0] in 'aeiouAEIOU':
-       return odstrani_samoglasnike(n[1:])
-   else:
-       return n
+def vsota_vecjih_stevk(n, k = 0):
+    vsota = 0
+    for i in str(n):
+         if int(i) >= k:
+             vsota += int(i)
+    return vsota
+        
+
    
 
-# =====================================================================@027484=
-# 4. podnaloga
-# Sestavite funkcijo `obrni_oklepaje`, ki sprejme niz, ki vsebuje zgolj cela
-# števila, operatorje in oklepaje "(" in ")" ter vrne niz, kjer so vsi oklepaji
-# obrnjeni (znak ")" se pretvori v "(" in obratno).
-# 
-#     >>> obrni_oklepaje("((()(3+4)))")
-#     ")))()3+4((("
+
+# =====================================================================@000983=
+# 3. podnaloga
+# Sestavite funkcijo `vsota_stevk_stevil_med(m, n)`, ki vrne vsoto števk
+# vseh števil med vključno `m` in `n`.
 # =============================================================================
-def obrni_oklepaje(n):
-    return n.replace("(", "x").replace(")", "(").replace("x", ")")
-# =====================================================================@027485=
-# 5. podnaloga
-# Sestavite funkcijo `prestej_posebno`, ki sprejme niz, znak `c` in število `k`
-# ter prešteje število presledkov za `k`-to pojavitvijo znaka `c`.
-# 
-#     >>> prestej_posebno("aa  a ", "a", 2)
-#     3
-#     >>> prestej_posebno("aa  a ", "a", 3)
-#     1
-# =============================================================================
+def vsota_stevk_stevil_med(m, n):
+    return sum(vsota_stevk(k) for k in range(m, n+1))
+   
 
-    
+  
 
 
-#n.count(c)
 
 
 
@@ -677,12 +661,12 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNzQ5MSwidXNlciI6MTE0Mjh9:1vzxcS:l5MIYEECaDsfJzj4ZqPioEAT2sj_5xikYs7Kd_-z6EM"
+        ] = "eyJwYXJ0Ijo5ODEsInVzZXIiOjExNDI4fQ:1w2Vet:ntpRpLQb_BBC9hTyAug2PPtGqI9l0hP3t8iftUyIye4"
         try:
-            Check.equal('prezrcali("x")', 'x')
-            Check.equal('prezrcali("xy")', 'yx')
-            Check.equal('prezrcali("abeceda")', 'adeceba')
-            Check.equal('prezrcali("alisebomartanatramobesila")', 'alisebomartanatramobesila')
+            Check.equal('vsota_stevk(428)', 14)
+            Check.equal('vsota_stevk(9563)', 23)
+            Check.equal('vsota_stevk(29543)', 23)
+            Check.equal('vsota_stevk(1749332)', 29)
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:
@@ -694,12 +678,22 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNzQ5MiwidXNlciI6MTE0Mjh9:1vzxcS:1o0Ql0K6PscjTi9HdfXDonl6BOW-fePs3DaOWp99tag"
+        ] = "eyJwYXJ0Ijo5ODIsInVzZXIiOjExNDI4fQ:1w2Vet:Y-qnRt0Qtw92YnBI93ThKOm7CYPi9J6CGxalqcV6nGs"
         try:
-            Check.equal('je_palindrom("kajak")', True)
-            Check.equal('je_palindrom("abeceda")', False)
-            Check.equal('je_palindrom("oko")', True)
-            Check.equal('je_palindrom("neradodaren")', True)
+            try:
+                Check.equal('vsota_vecjih_stevk(428)', 14)
+                Check.equal('vsota_vecjih_stevk(9563)', 23)
+                Check.equal('vsota_vecjih_stevk(29543)', 23)
+                Check.equal('vsota_vecjih_stevk(1749332)', 29)
+            except:
+                Check.error('Število k je podano kot obvezen argument.')
+            
+            Check.equal('vsota_vecjih_stevk(9563, k=6)', 15)
+            Check.equal('vsota_vecjih_stevk(849469, k=5)', 32)
+            for i in range(1, 100):
+                n = i ** i
+                k = i % 10
+                Check.secret(vsota_vecjih_stevk(n, k), '{0}^{0}, {1}'.format(i, k))
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:
@@ -711,46 +705,15 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNzQ4MywidXNlciI6MTE0Mjh9:1vzxcS:oiS0rwlVVqkydQBIV_PAbIiZFQMKcwaoIJIJL4YZcB8"
+        ] = "eyJwYXJ0Ijo5ODMsInVzZXIiOjExNDI4fQ:1w2Vet:lGeCWoqnIoHOAx_22_9oc1BqtwsH9Mk4R98Usz__Yag"
         try:
-            Check.equal('odstrani_samoglasnike("aeoIcesta")', "cesta")
-            Check.secret(odstrani_samoglasnike("laika"))
-            Check.secret(odstrani_samoglasnike("aeter"))
-        except TimeoutError:
-            Check.error("Dovoljen čas izvajanja presežen")
-        except Exception:
-            Check.error(
-                "Testi sprožijo izjemo\n  {0}",
-                "\n  ".join(traceback.format_exc().split("\n"))[:-2],
-            )
-
-    if Check.part():
-        Check.current_part[
-            "token"
-        ] = "eyJwYXJ0IjoyNzQ4NCwidXNlciI6MTE0Mjh9:1vzxcS:4cIUkFKNw2flXX9R9HQvDD-9J3bkudbm_5CIDlkvgqg"
-        try:
-            Check.equal('obrni_oklepaje("((()(3+4)))")', ")))()3+4(((")
-            Check.secret(obrni_oklepaje("1234()"))
-            Check.secret(obrni_oklepaje("1(2(3(4))))))))))"))
-        except TimeoutError:
-            Check.error("Dovoljen čas izvajanja presežen")
-        except Exception:
-            Check.error(
-                "Testi sprožijo izjemo\n  {0}",
-                "\n  ".join(traceback.format_exc().split("\n"))[:-2],
-            )
-
-    if Check.part():
-        Check.current_part[
-            "token"
-        ] = "eyJwYXJ0IjoyNzQ4NSwidXNlciI6MTE0Mjh9:1vzxcS:NBoZD9kgTBbCtZQL7_YXa14UaooXeEVF7ojRq-TGiPc"
-        try:
-            Check.equal('prestej_posebno("aa  a ", "a", 2)', 3)
-            Check.equal('prestej_posebno("aa  a ", "a", 3)', 1)
-            Check.secret(prestej_posebno("1234()", "3", 5))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 4))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 5))
-            Check.secret(prestej_posebno("xyxxx     x x x", "x", 6))
+            Check.equal('vsota_stevk_stevil_med(1, 500)', 5505)
+            Check.equal('vsota_stevk_stevil_med(123, 456)', 3777)
+            Check.equal('vsota_stevk_stevil_med(30, 20)', 0)
+            for i in range(1, 100):
+                m = 100 * i
+                n = m + 100
+                Check.secret(vsota_stevk_stevil_med(m, n), (m, n))
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:
