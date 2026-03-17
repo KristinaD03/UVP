@@ -47,6 +47,13 @@ def pretvori(s, b):
 #     >>> izbrisi_podvojene("abaab")
 #     "abb"
 # =============================================================================
+def izbrisi_podvojene(n):
+    if len(n) <= 1:
+        return n
+    if n[0].lower() == n[1].lower():
+        return izbrisi_podvojene(n[2:])
+    else:
+     return n[0] + izbrisi_podvojene(n[1:])
 
 # =====================================================================@027487=
 # 4. podnaloga
@@ -59,7 +66,12 @@ def pretvori(s, b):
 #     >>> vsak_k_ti("abcdefghijk", 0)
 #     ""
 # =============================================================================
-
+def vsak_k_ti(n, k):
+    a = len(n)
+    if k == 0:
+        return ""
+    else:
+        return n[0:a:k]
 # =====================================================================@027488=
 # 5. podnaloga
 # Sestavitev funkcijo `zaporedje`, ki sprejme niz in vrne nov niz sestavljen iz
@@ -71,9 +83,12 @@ def pretvori(s, b):
 # =============================================================================
 
 
-
-
-
+def zaporedje(n, k = 1):
+    if len(n) == 0:
+        return ""
+    else:
+        return n[0] + zaporedje(n[k:], k + 1)
+ 
 
 
 
