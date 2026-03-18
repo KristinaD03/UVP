@@ -1,57 +1,36 @@
 # =============================================================================
-# Pravilni del gesla
+# Kvadratni koren
 #
-# Micka in Tonček se igrata vislice. Micka si je izmislila geslo, Tonček pa ga 
-# poskuša uganiti.
-# =====================================================================@024175=
+# Približke za kvadratni koren števila $n$ lahko izračunamo po naslednjem
+# postopku. Začetni približek $x_0$ je enak $n / 2$. Vsak naslednji približek
+# $x_{k + 1}$ pa izračunamo kot $(x_k + n / x_k) / 2$.
+# =====================================================================@001003=
 # 1. podnaloga
-# Definirajte funkcijo `pravilni_del_gesla`, ki sprejme geslo in do sedaj ugibane 
-# črke. Funkcija naj vrne geslo, v katerem so črke, ki jih Tonček še ni uganil, 
-# zamenjane z znakom '_'.
-# Na primer:
-# 
-#     >>> pravilni_del_gesla('sladoled', 'aeighls')
-#     'sla__le_'
-#     >>> pravilni_del_gesla('dialektičnomaterialističen', 'kajeto')
-#     '__a_ekt___o_ate__a___t__e_'
+# Sestavite funkcijo `priblizek_po_korakih(n, k)`, ki po zgornjem postopku
+# izračuna `k`-ti približek korena števila `n`.
 # =============================================================================
-def pravilni_del_gesla(g, u):
-    m = ""
-    for i in g:
-        if i in u:
-            m += i
-        else:
-            m += "_"
-    return m
-  
+def priblizek_po_korakih(n, k):
+    korak = 0
+    x_k = n / 2
+    while korak < k:
+        x_k = (x_k + n / x_k) / 2
+        korak += 1
+    return x_k
 
-  
-        
 
-           
-    
-    
-    
-# =====================================================================@024176=
+# =====================================================================@001004=
 # 2. podnaloga
-# Micko zanima, katere izmed ugibanih črk so bile napačne (da lahko Tončka obesi).
-# 
-# Definirajte funkcijo `nepravilni_ugibi`, ki sprejme geslo in do sedaj ugibane 
-# črke. Funkcija naj vrne ugibane črke, ki se na pojavljajo v geslu.
-# Na primer:
-# 
-#     >>> nepravilni_ugibi('sladoled', 'aeighls')
-#     'igh'
-#     >>> nepravilni_ugibi('dialektičnomaterialističen', 'kajeto?')
-#     'j?'
+# Sestavite funkcijo `priblizek_do_natancnosti(n, eps)`, ki po zgornjem
+# postopku izračuna prvi približek korena števila `n`, za katerega se kvadrat
+# približka od `n` razlikuje za manj kot `eps`. Smislena vrednost za argument
+# `eps` je npr. $10^{-6}$.
 # =============================================================================
-def nepravilni_ugibi(g, u):
-    m = ""
-    for k in u:
-        if k not in g:
-            m += k
-    return m
-
+def priblizek_do_natancnosti(n, eps):
+    
+    k = 0
+    while abs(priblizek_po_korakih(n, k) ** 2 -n) > eps:
+        k += 1
+    return priblizek_po_korakih(n, k)
 
 
 
@@ -670,14 +649,18 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNDE3NSwidXNlciI6MTE0Mjh9:1w2WMz:PRn3ijp6SNRVtk6mjoSO1V2174D5T37HL4X5sttd_mQ"
+        ] = "eyJwYXJ0IjoxMDAzLCJ1c2VyIjoxMTQyOH0:1w2cTw:-ZsOiCIkTeXz91H6bMb7OczrRdqv-cG8ycmJhna2fDQ"
         try:
-            Check.equal('pravilni_del_gesla("sladoled", "aeighls")', 'sla__le_')
-            Check.equal('pravilni_del_gesla("dialektičnomaterialističen", "kajeto")', '__a_ekt___o_ate__a___t__e_')
-            Check.equal('pravilni_del_gesla("abcdef", "")', '______')
-            Check.equal('pravilni_del_gesla("", "ax")', '')
-            Check.equal('pravilni_del_gesla("posebni-znaki", "zn-ak")', '_____n_-znak_')
-            Check.secret(pravilni_del_gesla('sdfghjkjbvhckansdlknsldnaslkdnlsqweumno', 'kajetocau'))
+            Check.equal('priblizek_po_korakih(2, 0)', 1)
+            Check.equal('priblizek_po_korakih(2, 1)', 1.5)
+            Check.equal('priblizek_po_korakih(2, 2)', 1.4166666666666665)
+            Check.equal('priblizek_po_korakih(2, 3)', 1.4142156862745097)
+            Check.equal('priblizek_po_korakih(2, 4)', 1.4142135623746899)
+            Check.equal('priblizek_po_korakih(3, 5)', 1.7320508075688772)
+            
+            for n in range(1, 1000):
+                k = n % 10
+                Check.secret(priblizek_po_korakih(n, k), (n, k))
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:
@@ -689,14 +672,16 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNDE3NiwidXNlciI6MTE0Mjh9:1w2WMz:wS4Jh5eOOZNxVaQBIbnPTgNCGPyz7-E_aWicVjiZPA0"
+        ] = "eyJwYXJ0IjoxMDA0LCJ1c2VyIjoxMTQyOH0:1w2cTw:m6U8mjZT_38Jsa9zAjZvZ535AZ9lpMuVtgfvO1wWZ5c"
         try:
-            Check.equal('nepravilni_ugibi("sladoled", "aeighls")', 'igh')
-            Check.equal('nepravilni_ugibi("dialektičnomaterialističen", "kajeto")', 'j')
-            Check.equal('nepravilni_ugibi("abcdef", "")', '')
-            Check.equal('nepravilni_ugibi("", "ax")', 'ax')
-            Check.equal('nepravilni_ugibi("posebni-znaki", "zn-ak")', '')
-            Check.secret(nepravilni_ugibi('sdfghjkjbvhckansdlknsldnaslkdnlsqweumno', 'kajetocau'))
+            Check.equal('priblizek_do_natancnosti(2, 0.000001)', 1.4142135623746899)
+            Check.equal('priblizek_do_natancnosti(2, 0.01)', 1.4166666666666665)
+            Check.equal('priblizek_do_natancnosti(2, 0.00001)', 1.4142156862745097)
+            Check.equal('priblizek_do_natancnosti(3, 0.000001)', 1.7320508100147274)
+            Check.equal('priblizek_do_natancnosti(12345, 0.000001)', 111.10805551354053)
+            
+            for n in range(1, 1000):
+                Check.secret(priblizek_do_natancnosti(n, 0.000001), n)
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:

@@ -1,59 +1,133 @@
 # =============================================================================
-# Pravilni del gesla
-#
-# Micka in Tonček se igrata vislice. Micka si je izmislila geslo, Tonček pa ga 
-# poskuša uganiti.
-# =====================================================================@024175=
+# Sprehod
+# =====================================================================@009862=
 # 1. podnaloga
-# Definirajte funkcijo `pravilni_del_gesla`, ki sprejme geslo in do sedaj ugibane 
-# črke. Funkcija naj vrne geslo, v katerem so črke, ki jih Tonček še ni uganil, 
-# zamenjane z znakom '_'.
-# Na primer:
+# Sestavite funkcijo `celostevilski`, ki sprejme niz, ki
+# predstavlja sprehod po celih številih, in vrne število, v katerem se
+# sprehod konča.
 # 
-#     >>> pravilni_del_gesla('sladoled', 'aeighls')
-#     'sla__le_'
-#     >>> pravilni_del_gesla('dialektičnomaterialističen', 'kajeto')
-#     '__a_ekt___o_ate__a___t__e_'
+# Sprehod po celih številih se začne v številu 0, predstavimo pa ga z
+# nizem, sestavljenim iz znakov `+` in `-`. Na ostale znake v nizu se
+# ne oziramo.
 # =============================================================================
-def pravilni_del_gesla(g, u):
-    m = ""
-    for i in g:
-        if i in u:
-            m += i
-        else:
-            m += "_"
+def celostevilski(n):
+    m = 0
+    for k in n:
+        if k == "+":
+            m += 1
+        elif k == "-":
+            m -= 1
     return m
-  
-
-  
-        
-
-           
-    
-    
-    
-# =====================================================================@024176=
+# =====================================================================@009863=
 # 2. podnaloga
-# Micko zanima, katere izmed ugibanih črk so bile napačne (da lahko Tončka obesi).
+# Napišite število, v katerem se konča sprehod, podan z:
 # 
-# Definirajte funkcijo `nepravilni_ugibi`, ki sprejme geslo in do sedaj ugibane 
-# črke. Funkcija naj vrne ugibane črke, ki se na pojavljajo v geslu.
-# Na primer:
-# 
-#     >>> nepravilni_ugibi('sladoled', 'aeighls')
-#     'igh'
-#     >>> nepravilni_ugibi('dialektičnomaterialističen', 'kajeto?')
-#     'j?'
+#     ++++-+--++---+-+--+++-++-+++---+++--+-+---+-+++--++-+++-++-++-++----+-
+#     ++++-+--++---+-+--+++-++-+++---+++--+-+---+-+++--++-+++-++-++-++----+-
+#     +++-+++++++-+++--+--+++--+++---+--+--+++--+-+-+++--++--+++-----+----+-
+#     +++-+++++++-+++--+--+++--+++---+--+--+++--+-+-+++--++--+++-----+----+-
+#     +++--++++++--+--+-++++++++-+++++-+++-----+-+-+++-+-++-----+--+-+++--++
+#     +++--++++++--+--+-++++++++-+++++-+++-----+-+-+++-+-++-----+--+-+++--++
+#     +++--+--+-+-+-+--+-++-+---++++-+--++-+--++-+-++---++-------+++++++--+-
+#     +++--+--+-+-+-+--+-++-+---++++-+--++-+--++-+-++---++-------+++++++--+-
+#     ++-++-+-----++----+++++-+-+++++-++-+--+-++-++++-----++-+--++---++++++-
+#     ++-++-+-----++----+++++-+-+++++-++-+--+-++-++++-----++-+--++---++++++-
+#     ++-+-++----+-++--++++++-++--+-+++-+-+--+++-++--+---++++-+--++-+++--+-+
+#     ++-+-++----+-++--++++++-++--+-+++-+-+--+++-++--+---++++-+--++-+++--+-+
+#     ++-+---+--+-+++--+++--+++-+--+-++++++--++++---+--+-----++-++-+-++-+--+
+#     ++-+---+--+-+++--+++--+++-+--+-++++++--++++---+--+-----++-++-+-++-+--+
+#     ++--+-+--+--+-----+-+-++-++-+++-+++-+-++---++--++-+-++++++-+++-++-+++-
+#     ++--+-+--+--+-----+-+-++-++-+++-+++-+-++---++--++-+-++++++-+++-++-+++-
+#     ++------+--++---+-+-+-----++++-++---++-+--+-++------+-+--++++-+-++----
+#     ++------+--++---+-+-+-----++++-++---++-+--+-++------+-+--++++-+-++----
+#     +-++++++---++--------+++-----++----+----+-+++---+-+-+---+++-+---++-+-+
+#     +-++++++---++--------+++-----++----+----+-+++---+-+-+---+++-+---++-+-+
+#     +-+-+--+-+++++----++---++--++++-+++-++--+-+-+-+++--+-+-+--+++---+-+-+-
+#     +-+-+--+-+++++----++---++--++++-+++-++--+-+-+-+++--+-+-+--+++---+-+-+-
+#     +--------+-+--+--++--+--+++-+--++++-----+---+++++++++++++-++-+-+-+-+--
+#     +--------+-+--+--++--+--+++-+--++++-----+---+++++++++++++-++-+-+-+-+--
+#     -++-+++---+-+--+-+--++++----+-+--+-+-+++++-+++-+--+---+-+--+++-++-++++
+#     -++-+++---+-+--+-+--++++----+-+--+-+-+++++-+++-+--+---+-+--+++-++-++++
+#     -+--++--+++++-++-+--++-+---+--++---+----+++-+-++++-+---+++-+++---++-+-
+#     -+--++--+++++-++-+--++-+---+--++---+----+++-+-++++-+---+++-+++---++-+-
+#     -+---+------+++-+++----+----+++-+-+-+-+++------++-+-++----+---++++++++
+#     -+---+------+++-+++----+----+++-+-+-+-+++------++-+-++----+---++++++++
+#     --++-++--+-+++++-+--+---++-+--++---+-++-+----++-+--++++------+--+---+-
+#     --++-++--+-+++++-+--+---++-+--++---+-++-+----++-+--++++------+--+---+-
+#     --++--+----+--+---+-+++-+--++++-+--++-+-+-+-++-+---+-+-++++++---+-+--+
+#     --++--+----+--+---+-+++-+--++++-+--++-+-+-+-++-+---+-+-++++++---+-+---
+#     --+-++++-+-++----++++-+++-++--+-++-+++++-+-+-++--++++++++--+++--+++++-
+#     --+-++++-+-++----++++-+++-++--+-++-+++++-+-+-++--++++++++--+++--+++++-
+#     --+--+++-+-++-+--++---+--+-++-----+--+++--+++--------+-+++---++++-+-+-
+#     --+--+++-+-++-+--++---+--+-++-----+--+++--+++--------+-+++---++++-+-+-
+#     -----++--------++++-+++-+-++---+++---+++-++--++++--++-++-----++----+--
+#     -----++--------++++-+++-+-++---+++---+++-++--++++--++-++-----++----+--
+#     -----+------+++--++----+----+++--+++--+---+-+--+--+++-++--+--+--++--+-
+#     -----+------+++--++----+----+++--+++--+---+-+--+--+++-++--+--+--++--+-
+#     ------+--+-+--+-++-+++-+-++-+++++--+--+++++-+-++-+-++-++-+---++-++--+-
+#     ------+--+-+--+-++-+++-+-++-+++++--+--+++++-+-++-+-++-++-+---++-++--+-
 # =============================================================================
-def nepravilni_ugibi(g, u):
-    m = ""
-    for k in u:
-        if k not in g:
-            m += k
-    return m
+
+# =====================================================================@009864=
+# 3. podnaloga
+# Sestavite funkcijo `ravninski`, ki sprejme niz, ki
+# predstavlja zaporedje korakov v ravnini, in vrne točko, v kateri se
+# sprehod konča.
+# 
+# Sprehod po ravnini se začne v izhodišču, predstavimo pa ga z nizem,
+# sestavljenim iz črk `S`, `J`, `V` ali `Z`, odvisno od smeri
+# (sever, jug, vzhod, zahod). Na ostale znake v nizu se ne oziramo.
+# =============================================================================
+def ravninski(niz):
+    x = 0
+    y = 0
+    for znak in niz:
+        if znak == "S":
+            y += 1
+        elif znak == "J":
+            y -= 1
+        elif znak == "V":
+            x += 1
+        elif znak == "Z":
+            x -= 1
+    return (x, y)
 
 
-
+# =====================================================================@009865=
+# 4. podnaloga
+# Sestavite funkcijo `hitri(tek)`, ki sprejme niz, ki predstavlja
+# zaporedje korakov in skokov v ravnini, in vrne točko, v kateri se
+# tek konča.
+# 
+# Tek po ravnini se začne v izhodišču, predstavimo pa ga, tako kot
+# sprehod, z nizem, sestavljenim iz črk `S`, `J`, `V` ali `Z`, odvisno
+# od smeri (sever, jug, vzhod, zahod).
+# 
+# Poleg tega lahko tek vsebuje tudi števke od `1` do `9`, ki povedo,
+# koliko dolg naj bo naslednji korak. Tako niz `5S` pomeni skok
+# na sever, dolg 5 korakov. Privzamete lahko, da zaporednih števk v
+# nizu ni, ter da se na ostale znake v nizu ne oziramo.
+# =============================================================================
+def hitri(tek):
+    x = 0
+    y = 0
+    korak = 1
+    for znak in tek:
+        if znak.isdigit():
+            korak = int(znak)
+        elif znak == "S":
+            y += korak
+            korak = 1
+        elif znak == "J":
+            y -= korak
+            korak = 1
+        elif znak == "V":
+            x += korak
+            korak = 1
+        elif znak == "Z":
+            x -= korak
+            korak = 1
+    return (x, y)
 
 
 
@@ -670,14 +744,12 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNDE3NSwidXNlciI6MTE0Mjh9:1w2WMz:PRn3ijp6SNRVtk6mjoSO1V2174D5T37HL4X5sttd_mQ"
+        ] = "eyJwYXJ0Ijo5ODYyLCJ1c2VyIjoxMTQyOH0:1w2lYz:l0FFG9RXP6pDvGnGKGE49PO5qxmL3V77wBuFOTXGBtw"
         try:
-            Check.equal('pravilni_del_gesla("sladoled", "aeighls")', 'sla__le_')
-            Check.equal('pravilni_del_gesla("dialektičnomaterialističen", "kajeto")', '__a_ekt___o_ate__a___t__e_')
-            Check.equal('pravilni_del_gesla("abcdef", "")', '______')
-            Check.equal('pravilni_del_gesla("", "ax")', '')
-            Check.equal('pravilni_del_gesla("posebni-znaki", "zn-ak")', '_____n_-znak_')
-            Check.secret(pravilni_del_gesla('sdfghjkjbvhckansdlknsldnaslkdnlsqweumno', 'kajetocau'))
+            Check.equal('celostevilski("+++-+---+++-")', 2)
+            Check.equal('celostevilski("----++----")', -6)
+            Check.equal('celostevilski("")', 0)
+            Check.equal('celostevilski("+===-@#$*!@--==+")', -1)
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:
@@ -689,14 +761,45 @@ def _validate_current_file():
     if Check.part():
         Check.current_part[
             "token"
-        ] = "eyJwYXJ0IjoyNDE3NiwidXNlciI6MTE0Mjh9:1w2WMz:wS4Jh5eOOZNxVaQBIbnPTgNCGPyz7-E_aWicVjiZPA0"
+        ] = "eyJwYXJ0Ijo5ODYzLCJ1c2VyIjoxMTQyOH0:1w2lYz:Y1nOgHOpV9z2ty2i4cYAcT8ywoIix9UxOLuGjCw8Ncc"
         try:
-            Check.equal('nepravilni_ugibi("sladoled", "aeighls")', 'igh')
-            Check.equal('nepravilni_ugibi("dialektičnomaterialističen", "kajeto")', 'j')
-            Check.equal('nepravilni_ugibi("abcdef", "")', '')
-            Check.equal('nepravilni_ugibi("", "ax")', 'ax')
-            Check.equal('nepravilni_ugibi("posebni-znaki", "zn-ak")', '')
-            Check.secret(nepravilni_ugibi('sdfghjkjbvhckansdlknsldnaslkdnlsqweumno', 'kajetocau'))
+            try:
+                Check.secret(int(Check.current_part['solution']))
+            except:
+                Check.error("Za rešitev naloge morate vpisati celo število.")
+        except TimeoutError:
+            Check.error("Dovoljen čas izvajanja presežen")
+        except Exception:
+            Check.error(
+                "Testi sprožijo izjemo\n  {0}",
+                "\n  ".join(traceback.format_exc().split("\n"))[:-2],
+            )
+
+    if Check.part():
+        Check.current_part[
+            "token"
+        ] = "eyJwYXJ0Ijo5ODY0LCJ1c2VyIjoxMTQyOH0:1w2lYz:sIrDpHGO-UNh1H8CO9Atlgcq6r2C7qgsNUSXWRMlS1c"
+        try:
+            Check.equal('ravninski("SSJSSVSZ")', (0, 4))
+            Check.equal('ravninski("JJSJJSZZSZ")', (-3, -1))
+            Check.equal('ravninski("")', (0, 0))
+            Check.equal('ravninski("ABCDEFGHIJKLMNOPRSTUVZ")', (0, 0))
+        except TimeoutError:
+            Check.error("Dovoljen čas izvajanja presežen")
+        except Exception:
+            Check.error(
+                "Testi sprožijo izjemo\n  {0}",
+                "\n  ".join(traceback.format_exc().split("\n"))[:-2],
+            )
+
+    if Check.part():
+        Check.current_part[
+            "token"
+        ] = "eyJwYXJ0Ijo5ODY1LCJ1c2VyIjoxMTQyOH0:1w2lYz:T_1NqKdAws_omQJZgqtggBHcp3pmbqTlIj0_sv5bkA0"
+        try:
+            Check.equal('hitri("5S2V3S4V")', (6, 8))
+            Check.equal('hitri("JJS2JS2ZSZ")', (-3, -1))
+            Check.equal('hitri("1S2J3Z4V")', (1, -1))
         except TimeoutError:
             Check.error("Dovoljen čas izvajanja presežen")
         except Exception:
